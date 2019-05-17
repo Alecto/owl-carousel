@@ -1,3 +1,8 @@
 @import "../../libs/owl.carousel/src/scss/owl.carousel";
 @import "../../libs/owl.carousel/src/scss/owl.theme.default";
-@import "common";
+
+@import "variables";
+@import "mixins-media";
+@import "mixins";
+@import "common";
+@import "slider";

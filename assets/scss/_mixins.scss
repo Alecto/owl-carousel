@@ -1,0 +1,200 @@
+// Reset margin, padding and list-style from a list.
+
+@mixin unlist($m: 0, $p: 0) {
+  margin: $m;
+  padding: $p;
+
+  list-style: none;
+}
+
+
+
+// Single-line text with a three-dot at the end
+
+@mixin text-shorten {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+// Multiline text with a triple-dot at the end
+
+@mixin block-shorten($fz: 1rem, $lh: 1.5, $h: 70px, $l: 3) {
+  display: -webkit-box;
+  overflow: hidden;
+
+  height: $h;
+
+  font-size: $fz;
+  line-height: $fz * $lh;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $l;
+}
+
+
+
+// The first parameter - color, the second - transparency
+// One parameter - black with the specified transparency
+
+@mixin bg-color($a: 0, $rgb: 0) {
+  background: rgba($rgb, $rgb, $rgb, $a);
+}
+
+
+
+// Turn off the ability to select an item
+
+@mixin unselectable {
+  user-select: none;
+
+  -webkit-touch-callout: none;
+}
+
+
+
+// Background image, for the whole block
+// @include bg-image("image.jpg");
+// @include bg-image("image.jpg", #ff00ff, "fixed");
+
+@mixin bg-image($img, $bgc: gray, $fixed: "none") {
+  background-color: $bgc;
+  background-image: url($img);
+  background-position: top center;
+  background-size: cover;
+  @if $fixed == "fixed" {
+    background-attachment: fixed;
+  }
+}
+
+
+
+@mixin block-header($mb: 10px) {
+  margin-top: 0;
+  margin-bottom: $mb;
+
+  border-bottom: 1px solid $color-dark;
+}
+
+
+
+// Visually hidden element
+
+@mixin visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  border: 0;
+}
+
+
+
+// Absolute positioning
+
+@mixin abs-position ($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+
+
+// @include font-face('gotham', '/fonts/gotham');
+
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-style: $style;
+
+    src: url("#{$file-path}.eot");
+    src: url("#{$file-path}.eot?#iefix") format("embedded-opentype"), url("#{$file-path}.woff") format("woff"), url("#{$file-path}.ttf") format("truetype");
+  }
+}
+
+
+
+// Font size for older browsers, pixels
+// @include font-size(16);
+// @include font-size(12, 10);
+
+@mixin font-size($size, $base: 16) {
+  font-size: $size; // fallback for old browsers
+  font-size: ($size / $base) * 1rem;
+}
+
+
+// Retina images
+// background: url("logo.png") no-repeat;
+// @include image-2x("logo2x.png", 100px, 25px);
+
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+  (-o-min-device-pixel-ratio: 2.6/2),
+  (-webkit-min-device-pixel-ratio: 1.3),
+  (min-device-pixel-ratio: 1.3),
+  (min-resolution: 1.3dppx) {
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+
+
+// Background Gradient
+// @param {Color} $startColor [#3C3C3C] - Start Color
+// @param {Color} $endColor [#999999] - End Color
+
+@mixin background-gradient($startColor: #3c3c3c, $endColor: #999999, $start: 0, $end: 100%) {
+  background-color: $startColor;
+  background-image: linear-gradient(to bottom, $startColor $start, $endColor $end);
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+
+
+// Background Horizontal
+// @param {Color} $startColor [#3C3C3C] - Start Color
+// @param {Color} $endColor [#999999] - End Color
+
+@mixin background-horizontal($startColor: #3c3c3c, $endColor: #999999) {
+  background-color: $startColor;
+  background-image: linear-gradient(to right, $startColor, $endColor);
+
+  filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', gradientType='1');
+}
+
+
+// Background Horizontal - inverse direction
+// @param {Color} $startColor [#999999] - Start Color
+// @param {Color} $endColor [#3C3C3C] - End Color
+
+@mixin background-horizontal-inverse($startColor: #999999, $endColor: #3c3c3c) {
+  background-color: $startColor;
+  background-image: linear-gradient(to left, $startColor, $endColor);
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$endColor}', endColorStr='#{$startColor}', gradientType='1');
+}
+
+
+// Background Radial
+// @param {Color} $startColor [#3C3C3C] - Start Color
+// @param {Percentage} $startPos [0%] - Start position
+// @param {Color} $endColor [#999999] - End Color
+// @param {Percentage} $endPos [100%] - End position
+
+@mixin background-radial($startColor: #ffffff, $startPos: 0, $endColor: #000000, $endPos:100%) {
+  background: radial-gradient(ellipse at center, $startColor $startPos,$endColor $endPos);
+}

@@ -1,8 +1,4 @@
-/*
- *  Owl Carousel - Core
- */
 .owl-carousel {
-  /* position relative and z-index fix webkit rendering fonts issue */
   position: relative;
   z-index: 1;
 
@@ -19,7 +15,6 @@
   -ms-touch-action: pan-Y;
       touch-action: manipulation;
   -moz-backface-visibility: hidden;
-  /* fix firefox animation glitch */
 }
 
 .owl-carousel .owl-stage:after {
@@ -38,7 +33,6 @@
   position: relative;
 
   overflow: hidden;
-  /* fix for flashing background */
 
   -webkit-transform: translate3d(0px, 0px, 0px);
 }
@@ -140,15 +134,9 @@
 .owl-carousel.owl-rtl .owl-item {
   float: right;
 }
-
-/* No Js */
 .no-js .owl-carousel {
   display: block;
 }
-
-/*
- *  Owl Carousel - Animate Plugin
- */
 .owl-carousel .animated {
   -webkit-animation-duration: 1000ms;
           animation-duration: 1000ms;
@@ -187,25 +175,12 @@
     opacity: 0;
   }
 }
-
-/*
- * 	Owl Carousel - Auto Height Plugin
- */
 .owl-height {
   -webkit-transition: height 500ms ease-in-out;
        -o-transition: height 500ms ease-in-out;
           transition: height 500ms ease-in-out;
 }
 
-/*
- * 	Owl Carousel - Lazy Load Plugin
- */
-.owl-carousel .owl-item {
-  /**
-			This is introduced due to a bug in IE11 where lazy loading combined with autoheight plugin causes a wrong
-			calculation of the height of the owl-item that breaks page layouts
-		 */
-}
 
 .owl-carousel .owl-item .owl-lazy {
   -webkit-transition: opacity 400ms ease;
@@ -224,10 +199,6 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
-
-/*
- * 	Owl Carousel - Video Plugin
- */
 .owl-carousel .owl-video-wrapper {
   position: relative;
 
@@ -290,10 +261,6 @@
   width: 100%;
   height: 100%;
 }
-
-/*
- * 	Default theme - Owl Carousel CSS File
- */
 .owl-theme .owl-nav {
   margin-top: 10px;
 
@@ -368,7 +335,6 @@
 .owl-theme .owl-dots .owl-dot:hover span {
   background: #869791;
 }
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -378,27 +344,119 @@ body {
   margin: 100px;
 }
 
-.slide {
-  position: relative;
+.owl-theme .owl-dots .owl-dot span {
+  height: 5px;
+
+  border-radius: 0;
 }
 
-.slide__title {
+.owl-theme .owl-dots .owl-dot span:focus {
+  outline: none;
+}
+
+.owl-theme .owl-dots .owl-dot:focus {
+  outline: none;
+}
+
+.slider {
+  padding: 10px 10px 5px;
+
+  background-color: #333333;
+}
+
+.slide {
+  position: relative;
+
+  height: 200px;
+}
+
+.slide__image {
   position: absolute;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  margin: 0;
-  padding: 10px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 
-  text-align: center;
+.slide__image img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slide__image::after {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  bottom: 50%;
+  left: 50%;
+
+  content: "";
+  -webkit-transition: 0.25s ease 0.25s;
+       -o-transition: 0.25s ease 0.25s;
+          transition: 0.25s ease 0.25s;
+
+  opacity: 0.75;
+  background-color: red;
+}
+
+.slide__title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  margin: 0;
+  padding: 15px;
+
+  -webkit-transition: opacity 0.25s linear 0.5s;
+       -o-transition: opacity 0.25s linear 0.5s;
+          transition: opacity 0.25s linear 0.5s;
   letter-spacing: 1px;
   text-transform: uppercase;
 
+  opacity: 0;
   color: #ffffff;
-  text-shadow: 1px 1px 1px #000000, 1px 1px 2px #000000, 1px 1px 3px #000000, 1px 1px 5px #000000, 1px 1px 10px #000000, 1px 1px 15px #000000;
 
   font-family: "Arial", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.slide:hover div::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.slide:hover h4 {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .owl-theme .owl-dots .owl-dot span {
+    width: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .owl-theme .owl-dots .owl-dot span {
+    width: 10px;
+  }
 }
